@@ -30,4 +30,11 @@ describe(Page.groupId(params), () => {
         await Page.open();
         await Page.singinWithInvalidCreds(Data, inputs.assert)
     })
+
+    params.test = Data.groups[0].tests[3];
+    it(Page.testId(params), async () => {
+        inputs = Data.groups[0].tests[3];
+        await Page.open();
+        await Page.signinWithUnregisteredEmail(Data, inputs.assert)
+    })
 })

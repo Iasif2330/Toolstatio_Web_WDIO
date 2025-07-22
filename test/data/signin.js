@@ -77,7 +77,10 @@ export default class Signin extends Page{
                         count: 1.4,
                         name: 'Verify if the user can sign into the website using unregistered email address',
                         expect: 'The user should not be able to sign in using unregistered email address',
-                        assert: 'Ongeldige inloggegevens'
+                        assert: {
+                            unregistered_email_err_msg: 'Ongeldige inloggegevens',
+                            expected_url_signin: this.base_url + '/login'
+                        }
                     },
                     {
                         count: 1.5,

@@ -81,4 +81,23 @@ export default class SigninPage extends Page{
     const currentUrl = await browser.getUrl()
     await expect(currentUrl).toBe(assert.expected_url_signin)
     }
+
+    async signinWithUnregisteredEmail(data, assert){
+        await helper.waitForDisplayed(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await helper.waitForClickable(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await Sl.testid(header.element.header_signin_link_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.signin_header_testid), this.medium_pause)
+        await helper.waitForClickable(Sl.testid(data.element.email_address_field_testid), this.medium_pause)
+        await Sl.testid(data.element.email_address_field_testid).setValue(data.value.unregistered_email)
+        await helper.waitForClickable(Sl.testid(data.element.password_field_testid), this.medium_pause)
+        await Sl.testid(data.element.password_field_testid).setValue(data.value.password)
+        await helper.waitForClickable(Sl.testid(data.element.signin_btn_testid), this.medium_pause)
+        await Sl.testid(data.element.signin_btn_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.invalid_credential_testid), this.medium_pause)
+        const err_msg = await Sl.testid(data.element.invalid_credential_testid).getText()
+        expect(err_msg).toBe(assert.unregistered_email_err_msg)
+        const currentUrl = await browser.getUrl()
+        await expect(currentUrl).toBe(assert.expected_url_signin)
+    }
   }
+
