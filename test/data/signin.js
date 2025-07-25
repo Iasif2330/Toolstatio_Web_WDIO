@@ -86,13 +86,19 @@ export default class Signin extends Page{
                         count: 1.5,
                         name: 'Verify if the user can sign into the website using incorrect password',
                         expect: 'The user should not be able to sign in using incorrect password',
-                        assert: 'Ongeldige inloggegevens'
+                        assert: {
+                            incorrect_pwd__err_msg: 'Ongeldige inloggegevens',
+                            expected_url_signin: this.base_url + '/login'
+                        }
                     },
                     {
                         count: 1.6,
                         name: 'Verify if the "create one now" link is functional or not',
                         expect: 'The "create one now" link should be functional. It should open the "Sign Up" page',
-                        assert: this.base_url+'/register'
+                        assert: {
+                            expected_url_signup: this.base_url+'/register',
+                            create_acc_text: 'Maak een nieuw account aan.'
+                        }
                     }
                 ]
             }

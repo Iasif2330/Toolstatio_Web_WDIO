@@ -1,5 +1,6 @@
 import Page from '../webdriverio-helper/Page.js'
 import Data from '../data/signin.js'
+import Signup from '../data/signup.js'
 import Header from '../data/header.js'
 import Selector from '../webdriverio-helper/Selector.js'
 import Asserts from '../webdriverio-helper/Asserts.js';
@@ -10,6 +11,7 @@ let Sl = new Selector();
 let helper = new Helper();
 let data = new Data()
 let header = new Header()
+let signup = new Signup()
 
 export default class SigninPage extends Page{
     constructor() {
@@ -98,6 +100,39 @@ export default class SigninPage extends Page{
         expect(err_msg).toBe(assert.unregistered_email_err_msg)
         const currentUrl = await browser.getUrl()
         await expect(currentUrl).toBe(assert.expected_url_signin)
+    }
+
+    async signinUsingIncorrectPassword(data, assert){
+        await helper.waitForDisplayed(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await helper.waitForClickable(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await Sl.testid(header.element.header_signin_link_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.signin_header_testid), this.medium_pause)
+        await helper.waitForClickable(Sl.testid(data.element.email_address_field_testid), this.medium_pause)
+        await Sl.testid(data.element.email_address_field_testid).setValue(data.value.email)
+        await helper.waitForClickable(Sl.testid(data.element.password_field_testid), this.medium_pause)
+        await Sl.testid(data.element.password_field_testid).setValue(data.value.incorrect_password)
+        await helper.waitForClickable(Sl.testid(data.element.signin_btn_testid), this.medium_pause)
+        await Sl.testid(data.element.signin_btn_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.invalid_credential_testid), this.medium_pause)
+        const err_msg = await Sl.testid(data.element.invalid_credential_testid).getText()
+        expect(err_msg).toBe(assert.incorrect_pwd__err_msg)
+        const currentUrl = await browser.getUrl()
+        await expect(currentUrl).toBe(assert.expected_url_signin)
+    }
+
+    async navigateToSignup(data, assert){
+        await helper.waitForDisplayed(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await helper.waitForClickable(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await Sl.testid(header.element.header_signin_link_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.signin_header_testid), this.medium_pause)
+        await helper.waitForDisplayed(Sl.testid(data.element.create_account_link_testid), this.medium_pause)
+        await helper.waitForClickable(Sl.testid(data.element.create_account_link_testid), this.medium_pause)
+        const createAcctext = await Sl.testid(data.element.create_account_link_testid).getText()
+        await expect(createAcctext).toBe(assert.create_acc_text)
+        await Sl.testid(data.element.create_account_link_testid).click()
+        await helper.waitForDisplayed(Sl.testid(signup.element.signup_heading_testid), this.medium_pause)
+        const currentUrl = await browser.getUrl()
+        await expect(currentUrl).toBe(assert.expected_url_signup)
     }
   }
 
