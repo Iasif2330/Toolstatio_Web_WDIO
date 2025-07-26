@@ -3,7 +3,7 @@ pipeline {
 
   tools {
     nodejs 'Node 24 LTS' // Your Node.js setup in Jenkins
-    allure 'Allure'       // Allure CLI tool installed in Jenkins
+    allure 'AllureCLI'       // Allure CLI tool installed in Jenkins
   }
 
   options {
