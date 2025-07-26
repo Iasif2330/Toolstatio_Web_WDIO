@@ -55,17 +55,6 @@ pipeline {
       allure([
         results: [[path: 'allure-results']]
       ])
-
-      // Send email notification with build status and Allure report link
-      emailext (
-        to: 'iasif.2330@icloud.com',
-        subject: "WDIO Tests: Build ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
-        body: """<p>Build Status: ${currentBuild.currentResult}</p>
-                 <p>Job: ${env.JOB_NAME}</p>
-                 <p>Build Number: ${env.BUILD_NUMBER}</p>
-                 <p><a href="${env.BUILD_URL}allure">Allure Report</a></p>""",
-        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
-      )
     }
   }
 }
