@@ -9999,3 +9999,4 @@ node_modules/puppeteer-core/lib/cjs/puppeteer/node/LaunchOptions.d.ts.map
 node_modules
 allure-report/
 allure-results/
+.DS_Store
