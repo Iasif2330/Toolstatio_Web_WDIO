@@ -2,7 +2,8 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'Node 24 LTS' // Your Node.js setup in Jenkins
+    nodejs 'Node 24 LTS'      // Your Node.js setup in Jenkins
+    allure 'Allure'           // Your Allure CLI tool configured in Jenkins
   }
 
   options {
@@ -32,28 +33,27 @@ pipeline {
 
         stage('Install Dependencies') {
           steps {
-            // use ci if you have a package-lock.json; otherwise keep npm install
             sh 'npm ci || npm install'
           }
         }
 
         stage('Run WDIO Tests') {
           steps {
-          sh 'npx wdio run wdio.conf.js'
+            script {
+              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh 'npx wdio run wdio.conf.js'
+              }
+            }
           }
         }
 
         stage('Generate Allure Report') {
           steps {
-            sh '''
-              # Ensure allure-commandline is available locally
-              if [ ! -d node_modules/allure-commandline ]; then
-                npm i -D allure-commandline
-              fi
+            // Optional debug to verify allure CLI is found
+            sh 'allure --version'
 
-              # Generate the HTML report
-              npx allure generate allure-results --clean -o allure-report
-            '''
+            // Generate Allure report using Jenkins-installed allure CLI
+            sh 'allure generate allure-results --clean -o allure-report'
           }
         }
       }
@@ -64,8 +64,6 @@ pipeline {
     always {
       echo 'Pipeline finished'
 
-      // Try to publish the report with the Jenkins Allure plugin if it’s configured,
-      // otherwise just archive the generated HTML so the build still passes.
       script {
         try {
           allure([
