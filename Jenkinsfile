@@ -2,8 +2,8 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'Node 24 LTS'      // Your Node.js setup in Jenkins
-    allure 'AllureCLI'           // Your Allure CLI tool configured in Jenkins
+    nodejs 'Node 24 LTS' // Your Node.js setup in Jenkins
+    allure 'Allure'       // Allure CLI tool installed in Jenkins
   }
 
   options {
@@ -49,11 +49,15 @@ pipeline {
 
         stage('Generate Allure Report') {
           steps {
-            // Optional debug to verify allure CLI is found
-            sh 'allure --version'
+            sh '''
+              # Ensure allure-commandline is available locally
+              if [ ! -d node_modules/allure-commandline ]; then
+                npm i -D allure-commandline
+              fi
 
-            // Generate Allure report using Jenkins-installed allure CLI
-            sh 'allure generate allure-results --clean -o allure-report'
+              # Generate the HTML report
+              npx allure generate allure-results --clean -o allure-report
+            '''
           }
         }
       }
@@ -63,7 +67,6 @@ pipeline {
   post {
     always {
       echo 'Pipeline finished'
-
       script {
         try {
           allure([
