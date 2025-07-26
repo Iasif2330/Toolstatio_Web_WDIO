@@ -2,7 +2,7 @@ pipeline {
   agent any
 
   tools {
-    nodejs 'Node 24 LTS' // Use Node.js version named "Node 24 LTS" configured in Jenkins
+    nodejs 'Node 24 LTS' // Your Node.js setup
   }
 
   stages {
@@ -16,29 +16,31 @@ pipeline {
       stages {
         stage('Checkout') {
           steps {
-            // Checkout source code from SCM (GitHub, etc.)
             checkout scm
           }
         }
 
         stage('Debug Env') {
           steps {
-            // Print environment variables containing 'CHANGE' to verify PR-related info
             sh 'printenv | grep CHANGE || true'
           }
         }
 
         stage('Install Dependencies') {
           steps {
-            // Install npm packages required by the project
             sh 'npm install'
           }
         }
 
         stage('Run WDIO Tests') {
           steps {
-            // Run WebDriverIO tests using the specified config file
             sh 'npx wdio run wdio.conf.js'
+          }
+        }
+
+        stage('Generate Allure Report') {
+          steps {
+            sh 'allure generate allure-results --clean -o allure-report || true'
           }
         }
       }
@@ -47,8 +49,23 @@ pipeline {
 
   post {
     always {
-      // This block runs regardless of build result to indicate pipeline completion
       echo 'Pipeline finished'
+
+      // Publish Allure report inside Jenkins UI (requires Allure Jenkins plugin)
+      allure([
+        results: [[path: 'allure-results']]
+      ])
+
+      // Send email notification with build status and Allure report link
+      emailext (
+        to: 'iasif.2330@icloud.com',
+        subject: "WDIO Tests: Build ${currentBuild.currentResult} - ${env.JOB_NAME} #${env.BUILD_NUMBER}",
+        body: """<p>Build Status: ${currentBuild.currentResult}</p>
+                 <p>Job: ${env.JOB_NAME}</p>
+                 <p>Build Number: ${env.BUILD_NUMBER}</p>
+                 <p><a href="${env.BUILD_URL}allure">Allure Report</a></p>""",
+        recipientProviders: [[$class: 'DevelopersRecipientProvider'], [$class: 'RequesterRecipientProvider']]
+      )
     }
   }
 }

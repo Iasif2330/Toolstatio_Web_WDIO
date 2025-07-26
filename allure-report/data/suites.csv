@@ -1,0 +1,31 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","4032","[TEST ID: [35mSI_1_1.4[39m] Verify if the user can sign into the website using unregistered email address
+    [34mExpect:[39m The user should not be able to sign in using unregistered email address","","Sat Jul 26 18:44:29 IST 2025","passed","Sat Jul 26 18:44:33 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
+"","13015","[TEST ID: [35mSI_1_1.2[39m] Verify if the user can sign out from an account or not
+    [34mExpect:[39m The user should be able to sign out from an account","","Sat Jul 26 18:44:13 IST 2025","passed","Sat Jul 26 18:44:26 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
+"","3359","[TEST ID: [35mSI_1_1.6[39m] Verify if the ""create one now"" link is functional or not
+    [34mExpect:[39m The ""create one now"" link should be functional. It should open the ""Sign Up"" page","","Sat Jul 26 18:44:37 IST 2025","passed","Sat Jul 26 18:44:41 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
+"","4090","[TEST ID: [35mSI_1_1.5[39m] Verify if the user can sign into the website using incorrect password
+    [34mExpect:[39m The user should not be able to sign in using incorrect password","","Sat Jul 26 18:44:33 IST 2025","passed","Sat Jul 26 18:44:37 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
+"","9780","[TEST ID: [35mSI_1_1.1[39m] Verify if the user can sign into the website using valid credentials
+    [34mExpect:[39m The user should be able to sign in using valid credentials","","Sat Jul 26 18:44:03 IST 2025","passed","Sat Jul 26 18:44:13 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
+"","2911","[TEST ID: [35mSI_1_1.3[39m] Verify if the user can sign into the website using invalid email address
+    [34mExpect:[39m The user should not be able to sign in using invalid email address","","Sat Jul 26 18:44:26 IST 2025","passed","Sat Jul 26 18:44:29 IST 2025","","[31m[39m
+[31m--------------------------------------------------------------------------------------------------------[39m[1m[22m
+[1m[PAGE ID: [35mSI[39m] Page: Signin URL: https://www.toolstation.nl/login[22m
+[GROUP ID: [35mSI_1[39m] Functionality","",""
