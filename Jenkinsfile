@@ -64,6 +64,9 @@ pipeline {
               branch 'performance-test-script'
             }
           }
+          environment {
+            PATH = "/opt/homebrew/bin:${env.PATH}"
+          }
           steps {
             script {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
