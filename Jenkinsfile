@@ -3,7 +3,7 @@ pipeline {
 
   tools {
     nodejs 'Node 24 LTS' // Your Node.js setup in Jenkins
-    allure 'AllureCLI'       // Allure CLI tool installed in Jenkins
+    allure 'AllureCLI'   // Allure CLI tool installed in Jenkins
   }
 
   options {
@@ -42,6 +42,26 @@ pipeline {
             script {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
                 sh 'npx wdio run wdio.conf.js'
+              }
+            }
+          }
+        }
+
+        // stage('Run API Tests') {
+        //   steps {
+        //     script {
+        //       catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+        //         sh 'npm run test:api'
+        //       }
+        //     }
+        //   }
+        // }
+
+        stage('Run Performance Tests') {
+          steps {
+            script {
+              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+                sh 'npm run test:perf'
               }
             }
           }
