@@ -9,7 +9,7 @@ export default function () {
   const loginUrl = `${env.BASE_URL}/ecom/v1/customers/auth/login`;
 
   // Use the pre-login token for the initial login request
-  const preLoginToken = "MPPa92gq1HkRiec4HMRMjs77gKGj";
+  const preLoginToken = "Sgdbg7qPk2oSsGJfEThqxKffTUn8";
 
   const loginParams = {
     headers: {
@@ -47,13 +47,13 @@ export default function () {
 
   const trolleyParams = {
     headers: {
-      Accept: 'application/json',
-      Authorization: `Bearer ${preLoginToken}`,       // **Static** token here (not fresh login token)
-      'x-toolstation-customer-id': token,             // Fresh login token here (JWT)
-      Origin: 'https://www.toolstation.nl',           
-      Referer: 'https://www.toolstation.nl/',         
+      Accept: "application/json",
+      Authorization: `Bearer ${preLoginToken}`, // **Static** token here (not fresh login token)
+      "x-toolstation-customer-id": token, // Fresh login token here (JWT)
+      Origin: "https://www.toolstation.nl",
+      Referer: "https://www.toolstation.nl/",
     },
-  }
+  };
 
   const trolleyRes = http.get(trolleyUrl, trolleyParams);
 

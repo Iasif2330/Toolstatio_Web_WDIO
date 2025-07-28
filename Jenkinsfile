@@ -40,7 +40,7 @@ pipeline {
         stage('Run WDIO Tests') {
           steps {
             script {
-              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                 sh 'npx wdio run wdio.conf.js'
               }
             }
@@ -58,6 +58,15 @@ pipeline {
         // }
 
         stage('Run Performance Tests') {
+          when {
+            anyOf {
+              branch 'main'
+              branch 'performance-test-script'
+            }
+          }
+          environment {
+            PATH = "/opt/homebrew/bin:${env.PATH}"
+          }
           steps {
             script {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
