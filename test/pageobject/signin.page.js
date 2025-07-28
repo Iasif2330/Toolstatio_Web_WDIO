@@ -134,5 +134,20 @@ export default class SigninPage extends Page{
         const currentUrl = await browser.getUrl()
         await expect(currentUrl).toBe(assert.expected_url_signup)
     }
-  }
+
+    async navigateToForgotPassword(data, assert){
+        await helper.waitForDisplayed(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await helper.waitForClickable(Sl.testid(header.element.header_signin_link_testid), this.long_pause)
+        await Sl.testid(header.element.header_signin_link_testid).click()
+        await helper.waitForDisplayed(Sl.testid(data.element.signin_header_testid), this.medium_pause)
+        await helper.waitForDisplayed(Sl.testid(data.element.signin_forgot_password_link_testid), this.medium_pause)
+        await helper.waitForClickable(Sl.testid(data.element.signin_forgot_password_link_testid), this.medium_pause)
+        const forgotPwdText = await Sl.testid(data.element.signin_forgot_password_link_testid).getText()
+        await expect(forgotPwdText).toBe(assert.forgot_pwd_text)
+        await Sl.testid(data.element.signin_forgot_password_link_testid).click()
+        await browser.pause(this.small_pause)
+        const currentUrl = await browser.getUrl()
+        await expect(currentUrl).toBe(assert.expected_url_forgot_pwd)
+    }
+}
 
