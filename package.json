@@ -5,8 +5,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
-    "wdio": "wdio run wdio.conf.js",
+    "test:ui": "wdio run wdio.conf.js",
+    "wdio": "npm run test:ui",
+    "test:api": "mocha test/api/specs/**/*.spec.js --timeout 10000",
+    "test:perf": "k6 run performance/script/loginloadtest.js",
+    "test:all": "npm run test:ui && npm run test:api && npm run test:perf",
     "report": "allure generate allure-results --clean -o allure-report && allure open allure-report"
   },
   "keywords": [],
@@ -20,8 +23,11 @@
     "@wdio/runner": "^8.45.0",
     "@wdio/spec-reporter": "^9.18.0",
     "allure-commandline": "^2.34.1",
+    "axios": "^1.11.0",
+    "chai": "^5.2.1",
     "chromedriver": "^138.0.3",
     "devtools": "^8.42.0",
+    "mocha": "^11.7.1",
     "wdio-chromedriver-service": "^8.1.1",
     "webdriverio": "^8.45.0"
   },
