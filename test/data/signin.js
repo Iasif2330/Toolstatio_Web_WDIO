@@ -99,6 +99,15 @@ export default class Signin extends Page{
                             expected_url_signup: this.base_url+'/register',
                             create_acc_text: 'Maak een nieuw account aan.'
                         }
+                    },
+                    {
+                        count: 1.7,
+                        name: 'Verify if the "Forgot Pwd" link is functional or not',
+                        expect: 'The "Forgot Pwd" link should be functional. It should open the "Forgot Password" page',
+                        assert: {
+                            expected_url_forgot_pwd: this.base_url+'/password/reset',
+                            forgot_pwd_text: 'Wachtwoord vergeten?'
+                        }
                     }
                 ]
             }

@@ -76,6 +76,7 @@ describe(Page.groupId(params), function () {
     () => Page.signinWithUnregisteredEmail(Data, inputs.assert),
     () => Page.signinUsingIncorrectPassword(Data, inputs.assert),
     () => Page.navigateToSignup(Data, inputs.assert),
+    () => Page.navigateToForgotPassword(Data, inputs.assert),
   ];
 
   Data.groups[0].tests.forEach((test, index) => {
