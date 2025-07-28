@@ -40,7 +40,7 @@ pipeline {
         stage('Run WDIO Tests') {
           steps {
             script {
-              catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
+              catchError(buildResult: 'FAILURE', stageResult: 'FAILURE') {
                 sh 'npx wdio run wdio.conf.js'
               }
             }
