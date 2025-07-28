@@ -59,10 +59,11 @@ pipeline {
 
         stage('Run Performance Tests') {
           when {
-            expression { 
-              return env.BRANCH_NAME == 'main' || env.BRANCH_NAME == 'performance-test-script'
+            anyOf {
+              branch 'main'
+              branch 'performance-test-script'
             }
-        }
+          }
           steps {
             script {
               catchError(buildResult: 'SUCCESS', stageResult: 'FAILURE') {
